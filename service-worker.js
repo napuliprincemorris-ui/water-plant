@@ -19,3 +19,16 @@ self.addEventListener('message', event => {
     });
   }
 });
+notifyBtn.addEventListener('click', () => {
+  if ('Notification' in window) {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        alert('Notifications enabled!');
+      } else {
+        alert('Notifications denied.');
+      }
+    });
+  } else {
+    alert('This browser does not support notifications.');
+  }
+});

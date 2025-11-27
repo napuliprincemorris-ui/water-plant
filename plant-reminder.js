@@ -215,3 +215,14 @@ function showReminder(message) {
 setInterval(() => {
   showReminder('Time to water your plants!');
 }, 300000);
+if ('Notification' in window) {
+  Notification.requestPermission().then(permission => {
+    if (permission === 'granted') {
+      console.log('Notifications allowed!');
+    } else {
+      console.log('Notifications denied.');
+    }
+  });
+} else {
+  console.log('This browser does not support notifications.');
+}

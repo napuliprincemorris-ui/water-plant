@@ -5,22 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Plant Watering Reminder</title>
   <link rel="stylesheet" href="plant-reminder.css" />
-  <link rel="manifest">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4CAF50">
-<link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(reg => console.log('Service Worker registered', reg))
-      .catch(err => console.log('Service Worker registration failed', err));
-  }
-</script>
-
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registered', reg))
+        .catch(err => console.log('Service Worker registration failed', err));
+    }
+  </script>
 </head>
 <body>
   <header class="topbar">
     <h1>Plant Watering Reminder</h1>
-
     <div class="datetime">
       <div id="dateDisplay">--/--/----</div>
       <div id="clock">--:--:--</div>
@@ -28,35 +25,68 @@
   </header>
 
   <main class="container">
-
     <section class="points card">
-      <div>
-        <strong>Total Points:</strong> <span id="totalPoints">0</span>
-      </div>
+      <div><strong>Total Points:</strong> <span id="totalPoints">0</span></div>
       <div id="streakText">No streaks yet</div>
       <button id="viewRewardsLog" class="btn">View Rewards Log</button>
     </section>
 
     <section class="add-reminder card">
-      <textarea id="reminderText" placeholder="Reminder: Water plant..."></textarea>
-
       <div class="row">
-        <input id="date" type="date" />
-        <input id="time" type="time" />
-
-        <select id="ml">
-          <option value="1000">1000 ml</option>
-          <option value="2000" selected>2000 ml</option>
-          <option value="3000">3000 ml</option>
-          <option value="4000">4000 ml</option>
-          <option value="5000">5000 ml</option>
+        <select id="treeName">
+          <option value="">Select Tree</option>
+          <option value="Narra" data-ml="500" data-frequency="Every 3 days">Narra</option>
+          <option value="Molave" data-ml="400" data-frequency="Every 3 days">Molave</option>
+          <option value="Bamboo" data-ml="300" data-frequency="Daily">Bamboo</option>
+          <option value="Talisay" data-ml="400" data-frequency="Every 2 days">Talisay</option>
+          <option value="Banaba" data-ml="300" data-frequency="Every 2 days">Banaba</option>
+          <option value="Ipil" data-ml="500" data-frequency="Every 3 days">Ipil</option>
+          <option value="Acacia" data-ml="400" data-frequency="Every 2 days">Acacia</option>
+          <option value="Caimito" data-ml="300" data-frequency="Every 2 days">Caimito</option>
+          <option value="Pili" data-ml="400" data-frequency="Every 3 days">Pili</option>
+          <option value="Banana" data-ml="500" data-frequency="Daily">Banana</option>
         </select>
 
-        <button id="addBtn" class="btn">Add</button>
+        <select id="ml">
+          <option value="">Select Amount (ml)</option>
+          <script>
+            for (let i = 100; i <= 2500; i += 100) {
+              document.write(`<option value="${i}">${i} ml</option>`);
+            }
+          </script>
+        </select>
+
+        <select id="frequency">
+          <option value="">Select Frequency</option>
+          <option value="Daily">Daily</option>
+          <option value="Every 2 days">Every 2 days</option>
+          <option value="Every 3 days">Every 3 days</option>
+          <option value="Twice a week">Twice a week</option>
+          <option value="Once a week">Once a week</option>
+        </select>
+
+        <select id="dayOfWeek">
+          <option value="">Select Day</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+
+        <select id="time">
+          <option value="07:00">7:00 AM</option>
+          <option value="12:00">12:00 PM</option>
+          <option value="16:00">4:00 PM</option>
+        </select>
+
+        <button id="addBtn" class="btn">Add Reminder</button>
       </div>
 
       <div class="row small">
-        <button id="notifyBtn">Enable Notifications & Sound</button>
+        <button id="notifyBtn" class="btn outline">Enable Notifications & Sound</button>
         <button id="clearAll" class="btn outline">Clear All</button>
       </div>
     </section>
@@ -65,7 +95,6 @@
       <h2>Your Reminders</h2>
       <div id="reminderList" class="reminder-list"></div>
     </section>
-
   </main>
 
   <footer class="footer">

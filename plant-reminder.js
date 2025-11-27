@@ -197,3 +197,21 @@
   render();
 
 })();
+if ('Notification' in window) {
+  Notification.requestPermission().then(permission => {
+    console.log('Notification permission:', permission);
+  });
+}
+function showReminder(message) {
+  // Popup alert
+  alert(message);
+
+  // Browser notification
+  if (Notification.permission === 'granted') {
+    new Notification('Plant Reminder', { body: message });
+  }
+}
+// Example: remind every 5 minutes (300000 ms)
+setInterval(() => {
+  showReminder('Time to water your plants!');
+}, 300000);

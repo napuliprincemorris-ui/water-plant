@@ -1,18 +1,21 @@
-const cacheName = 'plant-reminder-cache-v1';
-const filesToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
-];
-
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(cacheName).then(cache => cache.addAll(filesToCache)));
+  console.log('Service Worker installed');
+  self.skipWaiting();
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+self.addEventListener('activate', event => {
+  console.log('Service Worker activated');
+  event.waitUntil(clients.claim());
+});
+
+self.addEventListener('message', event => {
+  const data = event.data;
+  if (data && data.type === 'SHOW_NOTIFICATION') {
+    self.registration.showNotification('Plant Watering Reminder', {
+      body: data.text,
+      icon: 'icon.png', // optional
+      vibrate: [200, 100, 200],
+      tag: 'plant-reminder'
+    });
+  }
 });

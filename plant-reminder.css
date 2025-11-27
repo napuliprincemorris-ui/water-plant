@@ -1,0 +1,144 @@
+:root{
+  --blue:#3f7bff;
+  --light:#f4f6fb;
+  --card:#ffffff;
+  --radius:18px;
+  --text:#222;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body{
+  margin:0;
+  background:var(--light);
+  color:var(--text);
+}
+
+.topbar{
+  text-align:center;
+  padding:32px 16px 10px;
+}
+
+.topbar h1{
+  margin:0;
+  font-size:1.8rem;
+  color:var(--blue);
+}
+
+.datetime{
+  margin-top:6px;
+  font-size:0.95rem;
+  color:#555;
+}
+
+.container{
+  width:92%;
+  max-width:800px;
+  margin:20px auto;
+}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:var(--radius);
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  margin-bottom:16px;
+}
+
+.points{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.btn{
+  background:var(--blue);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:0.95rem;
+}
+
+.btn.outline{
+  background:white;
+  color:var(--blue);
+  border:2px solid var(--blue);
+}
+
+.add-reminder textarea{
+  width:100%;
+  min-height:70px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  padding:12px;
+  resize:none;
+  font-size:0.95rem;
+}
+
+.row{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+}
+
+.row.small{
+  margin-top:12px;
+}
+
+.row input, 
+.row select{
+  flex:1;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:0.95rem;
+}
+
+.list h2{
+  margin:0 0 12px 0;
+}
+
+.reminder-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.reminder{
+  background:white;
+  border:1px solid #eee;
+  padding:14px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.reminder .text{
+  font-weight:600;
+}
+
+.actions button{
+  margin-left:6px;
+  padding:6px 10px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+}
+
+.actions .complete{ background:#20b04b; color:white; }
+.actions .delete{ background:#ff6b6b; color:white; }
+
+.footer{
+  text-align:center;
+  margin:30px 0 50px;
+  color:#777;
+  font-size:0.85rem;
+}
+
+@media(max-width:600px){
+  .row{ flex-direction:column; }
+}

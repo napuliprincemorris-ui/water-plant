@@ -10,10 +10,18 @@ const freqSelect = document.getElementById('frequency');
 const daySelect = document.getElementById('dayOfWeek');
 const timeSelect = document.getElementById('time');
 
+// Populate ml options dynamically
+for (let i = 100; i <= 2500; i += 100) {
+  const opt = document.createElement('option');
+  opt.value = i;
+  opt.textContent = `${i} ml`;
+  mlSelect.appendChild(opt);
+}
+
 // Load reminders from localStorage
 let reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
 
-// Render reminders in the list
+// Render reminders
 function renderReminders() {
   reminderList.innerHTML = '';
   reminders.forEach(r => {
@@ -79,8 +87,8 @@ setInterval(() => {
   localStorage.setItem('reminders', JSON.stringify(reminders));
 }, 1000);
 
-// Optional: clear all reminders
-document.getElementById('clearAll')?.addEventListener('click', () => {
+// Clear all reminders
+document.getElementById('clearAll').addEventListener('click', () => {
   reminders = [];
   localStorage.setItem('reminders', JSON.stringify(reminders));
   renderReminders();

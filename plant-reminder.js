@@ -54,13 +54,17 @@ addBtn.addEventListener('click', () => {
 notifyBtn.addEventListener('click', () => {
   if ('Notification' in window) {
     Notification.requestPermission().then(permission => {
-      if (permission === 'granted') alert('Notifications enabled!');
-      else alert('Notifications blocked.');
+      if (permission === 'granted') {
+        alert('Notifications enabled!');
+      } else {
+        alert('Notifications blocked.');
+      }
     });
   } else {
     alert('Browser does not support notifications.');
   }
 });
+
 
 // Check reminders every second
 setInterval(() => {
